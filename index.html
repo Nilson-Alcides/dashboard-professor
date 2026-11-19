@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Professor</title>
+<style>
+:root{--azul:#075ba9;--fundo:#f3f6fa;--texto:#18324d;--borda:#dce5ef;--card:#fff;--azul-claro:#e7f0fa}
+*{box-sizing:border-box}body{margin:0;background:var(--fundo);font-family:Arial,sans-serif;color:var(--texto)}
+header{background:var(--azul);color:white;padding:16px max(20px,calc((100% - 1100px)/2));display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px #0002}
+.logo{background:white;color:var(--azul);padding:12px 15px;border-radius:10px;font-weight:bold}
+header h1{font-size:20px;margin:0 0 4px}header p{font-size:12px;margin:0;color:#e4efff}
+main{max-width:1100px;margin:24px auto;padding:0 16px}
+.panel{background:var(--card);border:1px solid var(--borda);border-radius:13px;padding:22px;margin-bottom:18px;box-shadow:0 4px 14px #17324d0d}
+.section-title{font-size:14px;font-weight:800;letter-spacing:1px;color:var(--azul);text-transform:uppercase;border-bottom:1px solid var(--borda);padding-bottom:11px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.schools{grid-template-columns:repeat(2,minmax(0,1fr))}
+.school{background:var(--azul);color:white;border:2px solid transparent;border-radius:10px;padding:20px;text-align:left;cursor:pointer;min-height:120px}
+.school:hover{border-color:#f3c34d}.school .emoji{font-size:30px}.school strong{display:block;font-size:18px;margin:8px 0}.school small{color:#e4efff}
+.module{background:var(--azul-claro);border:1px solid #c8ddf5;border-radius:10px;min-height:112px;padding:15px 9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;font-weight:bold;color:#142b46;text-decoration:none;cursor:pointer}
+.module:hover{background:#d5e7fa;border-color:var(--azul)}.module .emoji{font-size:27px}
+.tools a{min-height:95px}.hidden{display:none!important}
+button{font:inherit}.btn{background:var(--azul);color:white;border:0;border-radius:7px;padding:10px 15px;font-weight:bold;cursor:pointer}
+.btn-secondary{background:white;color:var(--texto);border:1px solid var(--borda);border-radius:7px;padding:9px 13px;cursor:pointer}
+.crumb{font-size:12px;color:#718096;margin-bottom:7px}.page-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}label{font-size:12px;font-weight:bold;display:block;margin-bottom:5px}
+input,select{width:100%;padding:10px;border:1px solid var(--borda);border-radius:7px;font:inherit}
+.records{margin-top:18px}.record{padding:12px;border:1px solid var(--borda);border-radius:8px;margin:8px 0;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.muted{color:#718096;font-size:12px}.summary{background:#f6f9fc;border-radius:8px;padding:14px;text-align:center}
+@media(max-width:650px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.schools{grid-template-columns:1fr}form{grid-template-columns:1fr}header{padding:14px 16px}.panel{padding:15px}.page-heading{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">ETEC | SEDUC</div>
+  <div><h1>PAINEL DO PROFESSOR NILSON</h1>
+    <p>Acesso rápido às aulas, materiais e avaliações</p></div>
+</header>
+
+<main>
+<section id="home">
+  <div class="panel">
+    <div class="section-title">🎓 Minhas áreas de ensino</div>
+    <div class="grid schools">
+      <button class="school" onclick="abrirEscola('ETECs')"><span class="emoji">🏫</span><strong>AULAS ETECs</strong><small>Ensino Técnico · Centro Paula Souza<br>ACESSAR ÁREA →</small></button>
+      <button class="school" onclick="abrirEscola('SEDUC')"><span class="emoji">📚</span><strong>AULAS SEDUC</strong><small>Ensino da Rede Estadual<br>ACESSAR ÁREA →</small></button>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="section-title">⚡ Acesso rápido</div>
+    <div class="grid">
+      <a class="module" id="link-drive-etec" target="_blank" rel="noopener"><span class="emoji">📁</span>DRIVE ETEC</a>
+      <button class="module" onclick="abrirEscola('ETECs','Conteúdo')"><span class="emoji">📖</span>Conteúdos e aulas</button>
+      <a class="module" id="link-drive-seduc" target="_blank" rel="noopener"><span class="emoji">📁</span>DRIVE SECUC</a>
+      <button class="module" onclick="abrirEscola('ETECs','PTD')"><span class="emoji">📋</span>Planejamento PTD</button>       
+      <button class="module" onclick="abrirEscola('ETECs','Avaliações')"><span class="emoji">📝</span>Provas e Forms</button>
+      <button class="module" onclick="abrirEscola('ETECs','PTD')"><span class="emoji">📋</span>Plano de Curso</button> 
+    </div>
+  </div>
+  <div class="panel">
+    <div class="section-title">🔗 Ferramentas de trabalho</div>
+    <div class="grid tools">
+      <a class="module" id="link-drive" target="_blank" rel="noopener"><span class="emoji">📁</span>Google Drive</a>
+      <a class="module" id="link-forms" target="_blank" rel="noopener"><span class="emoji">📝</span>Google Forms</a>
+      <a class="module" id="link-windows" target="_blank" rel="noopener"><span class="emoji">💻</span>Windows</a>
+    </div>
+  </div>
+</section>
+
+<section id="area" class="hidden">
+  <div class="page-heading">
+    <div><div class="crumb">PAINEL INICIAL / <span id="nome-escola"></span></div><h2 id="titulo-escola">AULAS ETECs</h2><p class="muted">Selecione uma área para organizar seus registros.</p></div>
+    <button class="btn-secondary" onclick="voltarInicio()">← Voltar ao início</button>
+  </div>
+  <div class="panel">
+    <div class="section-title">📚 Organização acadêmica</div>
+    <div class="grid">
+      <button class="module" onclick="abrirModulo('Turnos')"><span class="emoji">🕒</span>Turnos</button>
+      <button class="module" onclick="abrirModulo('Turmas')"><span class="emoji">👨‍🎓</span>Turmas</button>
+      <button class="module" onclick="abrirModulo('Disciplinas')"><span class="emoji">📚</span>Disciplinas</button>
+      <button class="module" onclick="abrirModulo('Conteúdo')"><span class="emoji">📖</span>Conteúdo</button>
+      <button class="module" onclick="abrirModulo('PTD')"><span class="emoji">📋</span>PTD</button>
+      <button class="module" onclick="abrirModulo('Avaliações')"><span class="emoji">📝</span>Avaliações</button>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="section-title">📌 Resumo da área</div>
+    <div class="grid">
+      <div class="summary"><strong id="n-turnos">0</strong><div class="muted">Turnos</div></div>
+      <div class="summary"><strong id="n-turmas">0</strong><div class="muted">Turmas</div></div>
+      <div class="summary"><strong id="n-disciplinas">0</strong><div class="muted">Disciplinas</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="cadastro" class="hidden">
+  <div class="page-heading">
+    <div><div class="crumb">PAINEL / <span id="crumb-escola"></span> / <span id="crumb-modulo"></span></div><h2 id="titulo-modulo"></h2></div>
+    <button class="btn-secondary" onclick="voltarArea()">← Voltar à área</button>
+  </div>
+  <div class="panel">
+    <p id="descricao" class="muted"></p>
+    <form id="form-registro"></form>
+    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" type="button" onclick="salvarRegistro()">+ Adicionar registro</button>
+      <button class="btn-secondary" type="button" onclick="limparFormulario()">Limpar campos</button>
+    </div>
+    <div class="records"><div class="section-title">📂 Registros cadastrados</div><div id="lista-registros" class="muted">Nenhum registro cadastrado.</div></div>
+    <p class="muted">Os registros deste protótipo ficam salvos apenas enquanto a página estiver aberta. A persistência poderá ser adicionada em uma próxima etapa.</p>
+  </div>
+</section>
+</main>
+
+<script>
+/* =========================================================
+   PERSONALIZE AQUI OS LINKS DA SUA DASHBOARD
+   Substitua os endereços de exemplo pelos seus links reais.
+   ========================================================= */
+const LINKS = {
+  drive: "https://drive.google.com/drive/folders/1_361HpqHCPWuHjfQqA9DOIivaNYBzI3N?usp=drive_link",
+  drive_etec: "https://drive.google.com/drive/folders/1mGdrUPxyMuHdnqJe9I1y9wqttH8cvoD3?usp=drive_link",
+  drive_seduc: "https://drive.google.com/drive/folders/1XfGmu7dEjSIq8lb67ItfAd6ggxBObvC6?usp=drive_link",
+  forms: "https://docs.google.com/forms/u/0/",
+  windows: "https://forms.cloud.microsoft/Pages/DesignPagev2.aspx",
+  ptds: ""
+};
+
+document.getElementById("link-drive").href = LINKS.drive;
+document.getElementById("link-drive-etec").href = LINKS.drive_etec;
+document.getElementById("link-drive-seduc").href = LINKS.drive_seduc;
+document.getElementById("link-forms").href = LINKS.forms;
+document.getElementById("link-windows").href = LINKS.windows;
+
+/* Dados e formulários */
+const campos = {
+  "Turnos": [["turno","Turno","select",["Manhã","Tarde","Noite"]]],
+  "Turmas": [["turma","Nome da turma","text"],["turno","Turno","select",["Manhã","Tarde","Noite"]]],
+  "Disciplinas": [["disciplina","Nome da disciplina","text"],["turma","Turma","text"]],
+  "Conteúdo": [["titulo","Título do conteúdo","text"],["turma","Turma / disciplina","text"],["link","Link do Drive ou material","url"]],
+  "PTD": [["titulo","Identificação do PTD","text"],["bimestre","Bimestre","select",["1º Bimestre","2º Bimestre","3º Bimestre","4º Bimestre"]],["link","Link do documento","url"]],
+  "Avaliações": [["titulo","Nome da avaliação","text"],["turma","Turma / disciplina","text"],["tipo","Tipo","select",["Google Forms","Prova impressa","Atividade","Questionário"]],["link","Link da avaliação","url"]]
+};
+const descricoes = {
+ "Turnos":"Cadastre os períodos em que suas aulas acontecem.",
+ "Turmas":"Organize as turmas de cada rede de ensino.",
+ "Disciplinas":"Cadastre as disciplinas e associe-as às turmas.",
+ "Conteúdo":"Organize conteúdos, materiais e links do Google Drive.",
+ "PTD":"Guarde o planejamento docente e os documentos por bimestre.",
+ "Avaliações":"Organize provas, atividades e links do Google Forms."
+};
+let escolaAtual = "ETECs", moduloAtual = "";
+const dados = {ETECs:{}, SEDUC:{}};
+const $ = id => document.getElementById(id);
+
+function mostrar(id){["home","area","cadastro"].forEach(x=>$(x).classList.toggle("hidden",x!==id));}
+function abrirEscola(escola,modulo){
+ escolaAtual=escola;
+ $("nome-escola").textContent=escola;
+ $("titulo-escola").textContent="AULAS "+escola;
+ mostrar("area"); atualizarResumo();
+ if(modulo) abrirModulo(modulo);
+}
+function voltarInicio(){mostrar("home");}
+function voltarArea(){mostrar("area");atualizarResumo();}
+function atualizarResumo(){
+ ["Turnos","Turmas","Disciplinas"].forEach(m=>{
+  const id={"Turnos":"n-turnos","Turmas":"n-turmas","Disciplinas":"n-disciplinas"}[m];
+  $(id).textContent=(dados[escolaAtual][m]||[]).length;
+ });
+}
+function abrirModulo(modulo){
+ moduloAtual=modulo;
+ dados[escolaAtual][modulo] ||= [];
+ $("crumb-escola").textContent=escolaAtual;
+ $("crumb-modulo").textContent=modulo;
+ $("titulo-modulo").textContent=modulo;
+ $("descricao").textContent=descricoes[modulo];
+ const form=$("form-registro");form.innerHTML="";
+ campos[modulo].forEach(([id,label,tipo,opcoes])=>{
+  const wrap=document.createElement("div");
+  const lab=document.createElement("label");lab.textContent=label;lab.htmlFor="campo-"+id;wrap.appendChild(lab);
+  const el=document.createElement(tipo==="select"?"select":"input");el.id="campo-"+id;
+  if(tipo==="select"){opcoes.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;el.appendChild(o);});}
+  else el.type=tipo;
+  el.placeholder=label;wrap.appendChild(el);form.appendChild(wrap);
+ });
+ renderizarRegistros();mostrar("cadastro");
+}
+function salvarRegistro(){
+ const registro={};let preenchido=true;
+ $("form-registro").querySelectorAll("input,select").forEach(el=>{
+  registro[el.id.replace("campo-","")]=el.value.trim();
+  if(!el.value.trim())preenchido=false;
+ });
+ if(!preenchido){alert("Preencha todos os campos antes de adicionar.");return;}
+ dados[escolaAtual][moduloAtual].push(registro);
+ renderizarRegistros();atualizarResumo();limparFormulario();
+}
+function limparFormulario(){$("form-registro").querySelectorAll("input").forEach(el=>el.value="");}
+function renderizarRegistros(){
+ const lista=$("lista-registros"),itens=dados[escolaAtual][moduloAtual]||[];lista.innerHTML="";
+ if(!itens.length){lista.textContent="Nenhum registro cadastrado.";return;}
+ itens.forEach((item,i)=>{
+  const row=document.createElement("div");row.className="record";
+  const info=document.createElement("div");
+  const titulo=document.createElement("strong");
+  titulo.textContent=item.titulo||item.disciplina||item.turno||"Registro";info.appendChild(titulo);
+  Object.entries(item).filter(([k])=>!["titulo","disciplina","turno"].includes(k)).forEach(([k,v])=>{
+   const p=document.createElement("div");p.className="muted";p.textContent=k+": "+v;info.appendChild(p);
+  });
+  if(item.link){const a=document.createElement("a");a.href=item.link;a.target="_blank";a.rel="noopener";a.textContent="Abrir link";a.className="muted";info.appendChild(a);}
+  const del=document.createElement("button");del.className="btn-secondary";del.textContent="Excluir";
+  del.onclick=()=>{itens.splice(i,1);renderizarRegistros();atualizarResumo();};
+  row.append(info,del);lista.appendChild(row);
+ });
+}
+</script>
+</body>
+</html>
